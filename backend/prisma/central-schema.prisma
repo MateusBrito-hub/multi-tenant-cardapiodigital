@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/prisma/generated/central"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("CENTRAL_DATABASE_URL")
+}
+
+model Tenant {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  slug     String   @unique
+  dbUrl    String
+  ativo    Boolean  @default(true)
+  criadoEm DateTime @default(now())
+}
