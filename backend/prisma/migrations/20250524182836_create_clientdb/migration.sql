@@ -7,9 +7,6 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('admin', 'consumidor');
 
--- DropTable
-DROP TABLE "Tenant";
-
 -- CreateTable
 CREATE TABLE "Usuario" (
     "id" SERIAL NOT NULL,

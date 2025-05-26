@@ -10,7 +10,7 @@ export async function criarBanco(dbName: string) {
 }
 
 export function migrarBanco(dbUrl: string) {
-    execSync(`npx prisma migrate deploy --schema=prisma/tenant.prisma`, {
+    execSync(`npx prisma migrate deploy --schema=prisma/client.prisma`, {
         env: { ...process.env, CLIENT_DATABASE_URL: dbUrl },
         stdio: 'inherit',
     });

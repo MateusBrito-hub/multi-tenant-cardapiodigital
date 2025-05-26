@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/prisma/generated/Client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("CLIENT_DATABASE_URL")
+}
+
+model Usuario {
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha String
+  role  Role
+}
+
+model Categoria {
+  id       String    @id @default(uuid())
+  nome     String
+  produtos Produto[] // <--- campo reverso da relação
+}
+
+model Produto {
+  id          String    @id @default(uuid())
+  nome        String
+  preco       Float
+  categoriaId String
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+}
+
+enum Role {
+  admin
+  consumidor
+}

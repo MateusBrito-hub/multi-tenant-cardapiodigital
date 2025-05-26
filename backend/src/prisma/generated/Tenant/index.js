@@ -127,7 +127,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\_codes\\multi-tenant-cardapiodigital\\backend\\src\\prisma\\generated\\Tenant",
+      "value": "C:\\_Codes\\multi-tenant-cardapiodigital\\backend\\src\\prisma\\generated\\Tenant",
       "fromEnvVar": null
     },
     "config": {
@@ -141,7 +141,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\_codes\\multi-tenant-cardapiodigital\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\_Codes\\multi-tenant-cardapiodigital\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -155,7 +155,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
