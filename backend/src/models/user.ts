@@ -1,14 +1,12 @@
-export interface IUsuario {
+export interface IUser {
     id: number
-    nome: string;
+    name: string;
     email: string;
-    senha: string;
-    role: 'admin' | 'consumidor'; // Ajuste conforme seu enum `Role`
+    password: string;
 }
 
-export interface IUsuarioUpdate {
-    nome?: string;
+export interface IUserUpdate {
+    name?: string;
     email?: string;
-    senha?: string;
-    role?: 'admin' | 'consumidor';
+    password?: string;
 }

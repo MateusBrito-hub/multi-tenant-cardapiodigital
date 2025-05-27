@@ -9,7 +9,7 @@ export async function getTenantClient(slug: string): Promise<ClientPrismaClient>
     if (cache[slug]) return cache[slug];
 
     const tenant = await central.tenant.findUnique({ where: { slug } });
-    if (!tenant || !tenant.ativo) throw new Error('Tenant inválido ou inativo');
+    if (!tenant || !tenant.status) throw new Error('Tenant inválido ou inativo');
 
     const decryptedDbUrl = decrypt(tenant.dbUrl);
 

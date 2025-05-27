@@ -120,24 +120,33 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UsuarioScalarFieldEnum = {
+exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
-  email: 'email',
-  senha: 'senha',
-  role: 'role'
+  name: 'name'
 };
 
-exports.Prisma.CategoriaScalarFieldEnum = {
+exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
-  nome: 'nome'
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  categoryId: 'categoryId'
 };
 
-exports.Prisma.ProdutoScalarFieldEnum = {
+exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
-  preco: 'preco',
-  categoriaId: 'categoriaId'
+  userId: 'userId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItensScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice'
 };
 
 exports.Prisma.SortOrder = {
@@ -149,15 +158,13 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-exports.Role = exports.$Enums.Role = {
-  admin: 'admin',
-  consumidor: 'consumidor'
-};
+
 
 exports.Prisma.ModelName = {
-  Usuario: 'Usuario',
-  Categoria: 'Categoria',
-  Produto: 'Produto'
+  Category: 'Category',
+  Product: 'Product',
+  Order: 'Order',
+  OrderItens: 'OrderItens'
 };
 
 /**

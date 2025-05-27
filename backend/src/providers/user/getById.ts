@@ -1,12 +1,12 @@
-import { PrismaClient } from '../../prisma/generated/Client';
+import { PrismaClient } from '../../prisma/generated/Tenant';
 
 export const getById = async (prisma: PrismaClient, id: number) => {
     try {
-        const usuario = await prisma.usuario.findUnique({ where: { id } });
+        const user = await prisma.user.findUnique({ where: { id } });
 
-        if (!usuario) return new Error('Usuário não encontrado');
+        if (!user) return new Error('Usuário não encontrado');
 
-        return usuario;
+        return user;
     } catch {
         return new Error('Erro ao consultar o usuário');
     }

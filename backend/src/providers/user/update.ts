@@ -1,17 +1,17 @@
-import { PrismaClient } from '../../prisma/generated/Client';
-import { IUsuarioUpdate } from '../../models';
+import { PrismaClient } from '../../prisma/generated/Tenant';
+import { IUserUpdate } from '../../models';
 
 export const update = async (
     prisma: PrismaClient,
     id: number,
-    dados: IUsuarioUpdate
+    dados: IUserUpdate
 ): Promise<void | Error> => {
     try {
-        const usuarioExiste = await prisma.usuario.findUnique({ where: { id } });
+        const user = await prisma.user.findUnique({ where: { id } });
 
-        if (!usuarioExiste) return new Error('Usuário não encontrado');
+        if (!user) return new Error('Usuário não encontrado');
 
-        await prisma.usuario.update({
+        await prisma.user.update({
             where: { id },
             data: dados,
         });

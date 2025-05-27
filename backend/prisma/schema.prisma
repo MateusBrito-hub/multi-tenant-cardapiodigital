@@ -10,9 +10,18 @@ datasource db {
 
 model Tenant {
   id        String   @id @default(uuid())
-  nome      String
+  name      String
   slug      String   @unique
   dbUrl     String   @map("db_url")
-  ativo    Boolean  @default(true)
+  email     String @unique
+  password  String
+  status    Boolean  @default(true)
   createdAt DateTime @default(now())
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  name      String
+  email     String @unique
+  password  String
 }

@@ -1,20 +1,11 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { getTenantClient } from '../../prisma/tenants';
+import { PrismaClient } from '../../prisma/generated/Tenant';
 import { userProvider } from '../../providers/user';
 
 export const create = async (req: Request, res: Response) : Promise<void> => {
     try {
-        const slug = req.params.slug;
-
-        if (!slug) {
-            res.status(StatusCodes.BAD_REQUEST).json({
-                errors: { default: 'Slug do tenant não informado.' }
-            });
-            return;
-        }
-
-        const prisma = await getTenantClient(slug);
+        const prisma = new PrismaClient();
         const result = await userProvider.create(prisma, req.body);
 
         if (result instanceof Error) {
