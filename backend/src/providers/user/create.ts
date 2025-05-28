@@ -1,5 +1,6 @@
 import { PrismaClient } from '../../prisma/generated/Tenant';
 import { IUser } from '../../shared/models'
+import bcrypt from 'bcrypt';
 
 export const create = async (prisma: PrismaClient, dados: Omit<IUser, 'id'>): Promise<number | Error> => {
     try {
@@ -13,8 +14,14 @@ export const create = async (prisma: PrismaClient, dados: Omit<IUser, 'id'>): Pr
         if (validateEmail) {
             return new Error('E-mail já cadastrado');
         }
+
+        const hashedPassword = await bcrypt.hash(dados.password, 10);
+
         const user = await prisma.user.create({
-            data: dados,
+            data: {
+                ...dados,
+                password: hashedPassword
+            },
         });
 
         return user.id;

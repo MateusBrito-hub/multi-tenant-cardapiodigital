@@ -1,5 +1,6 @@
 import { PrismaClient } from '../../prisma/generated/Tenant';
 import { IUserUpdate } from '../../shared/models';
+import bcrypt from 'bcrypt';
 
 export const update = async (prisma: PrismaClient, id: number, dados: IUserUpdate): Promise<void | Error> => {
     try {
@@ -7,6 +8,11 @@ export const update = async (prisma: PrismaClient, id: number, dados: IUserUpdat
 
         if (!user) return new Error('Usuário não encontrado');
 
+        if (dados.password) {
+            const hashedPassword = await bcrypt.hash(dados.password, 10);
+            dados.password = hashedPassword;
+        }
+        
         await prisma.user.update({
             where: { id },
             data: dados,
