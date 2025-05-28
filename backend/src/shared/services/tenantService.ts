@@ -1,7 +1,7 @@
-import { prisma } from '../config/prisma';
-import { criarBanco, migrarBanco } from '../utils/dbTools';
-import { encrypt } from '../utils/crypto';
-import { gerarSlug } from '../utils/slug';
+import { prisma } from '../../config/prisma';
+import { criarBanco, migrarBanco } from '../../utils/dbTools';
+import { encrypt } from '../../utils/crypto';
+import { gerarSlug } from '../../utils/slug';
 
 export async function criarTenant(name: string) {
     const slug = gerarSlug(name);

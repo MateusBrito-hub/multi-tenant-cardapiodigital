@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { criarTenant } from '../src/services/tenantService';
+import { criarTenant } from '../src/shared/services/tenantService';
 
 const nome = process.argv[2];
 

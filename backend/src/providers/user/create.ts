@@ -1,5 +1,5 @@
 import { PrismaClient } from '../../prisma/generated/Tenant';
-import { IUser } from '../../models'
+import { IUser } from '../../shared/models'
 
 export const create = async (prisma: PrismaClient, dados: Omit<IUser, 'id'>): Promise<number | Error> => {
     try {

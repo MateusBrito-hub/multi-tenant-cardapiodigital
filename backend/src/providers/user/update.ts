@@ -1,11 +1,7 @@
 import { PrismaClient } from '../../prisma/generated/Tenant';
-import { IUserUpdate } from '../../models';
+import { IUserUpdate } from '../../shared/models';
 
-export const update = async (
-    prisma: PrismaClient,
-    id: number,
-    dados: IUserUpdate
-): Promise<void | Error> => {
+export const update = async (prisma: PrismaClient, id: number, dados: IUserUpdate): Promise<void | Error> => {
     try {
         const user = await prisma.user.findUnique({ where: { id } });
 
