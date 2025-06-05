@@ -3,6 +3,8 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
+    mailToken?: string;
+    verified?: boolean;
 }
 
 export interface IUserUpdate {

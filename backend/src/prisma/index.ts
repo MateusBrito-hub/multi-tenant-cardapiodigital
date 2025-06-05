@@ -3,7 +3,7 @@ import { PrismaClient as ClientPrismaClient } from './generated/Client';
 import { decrypt } from '../utils/crypto';
 
 const cache: Record<string, ClientPrismaClient> = {};
-const central = new CentralPrismaClient();
+export const central = new CentralPrismaClient();
 
 export async function getTenantClient(slug: string): Promise<ClientPrismaClient> {
     if (cache[slug]) return cache[slug];

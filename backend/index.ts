@@ -1,3 +1,4 @@
 import {server} from './src';
 
-server.listen(process.env.APP_PORT || 8080, () => console.log('App Iniciado'));
+const app = server.listen(process.env.APP_PORT || 3000, () => console.log('App Iniciado'));
+app.setTimeout(5000);

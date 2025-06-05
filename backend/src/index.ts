@@ -5,7 +5,7 @@ import { router } from './routes';
 
 const server = express();
 
-server.use(cors({exposedHeaders: ['x-total-count']}));
+server.use(cors({exposedHeaders: ['x-total-count', 'Content-Type']}));
 server.use(express.json());
 server.use(router);
 
