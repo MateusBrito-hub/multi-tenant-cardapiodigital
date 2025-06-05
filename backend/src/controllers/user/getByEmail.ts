@@ -6,24 +6,24 @@ import { validation } from '../../shared/middlewares/validation';
 import * as yup from 'yup';
 
 interface IParamsProps {
-    id?: number,
+    email?: string,
 }
 
-export const getByIdValidation = validation((getSchema) => ({
+export const getByEmailValidation = validation((getSchema) => ({
     params: getSchema<IParamsProps>(yup.object().shape({
-        id: yup.number().integer().required().moreThan(0)
+        email: yup.string().required()
     }))
 }));
 
-export const getById = async (req: Request<IParamsProps>, res: Response): Promise<void> => {
-    if(!req.params.id) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+export const getByEmail = async (req: Request<IParamsProps>, res: Response): Promise<void> => {
+    if(!req.params.email) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         errors: {
-            default: 'O parâmetro "id" precisa ser informado'
+            default: 'O parâmetro "Email" precisa ser informado'
         }
         
     });
 
-    const result = await userProvider.getById(central , Number(req.params.id));
+    const result = await userProvider.getByEmail(central , req.params.email as string);
     
     if (result instanceof Error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

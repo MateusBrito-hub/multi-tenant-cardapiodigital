@@ -1,13 +1,15 @@
 import * as create  from './create';
 import * as getAll from './getAll';
-import * as getById from './getById';
+import * as getByEmail from './getByEmail';
 import * as update from './update';
 import * as confirmEmail from './confirmEmail';
+import * as singIn from './singIn';
 
 export const UserController = {
 	...create,
 	...getAll,
-	...getById,
+	...getByEmail,
 	...update,
-	...confirmEmail
+	...confirmEmail,
+	...singIn
 };

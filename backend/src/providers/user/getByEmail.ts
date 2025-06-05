@@ -1,8 +1,8 @@
 import { PrismaClient } from '../../prisma/generated/Tenant';
 
-export const getById = async (prisma: PrismaClient, id: number) => {
+export const getByEmail = async (prisma: PrismaClient, email: string) => {
     try {
-        const user = await prisma.user.findUnique({ where: { id } });
+        const user = await prisma.user.findUnique({ where: { email } });
 
         if (!user) return new Error('Usuário não encontrado');
 
