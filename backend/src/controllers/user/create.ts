@@ -20,7 +20,6 @@ export const createValidation = validation((getSchema) => ({
 
 export const create = async (req: Request<{}, {}, IBodyProps>, res: Response): Promise<void> => {
     try {
-        // Gera token de confirmação de e-mail
         const mailToken = await new Promise<string>((resolve, reject) => {
             crypto.randomBytes(32, (err, buffer) => {
                 if (err) reject(err);

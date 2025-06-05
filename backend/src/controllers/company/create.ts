@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PrismaClient } from '../../prisma/generated/Tenant';
+import { central } from '../../prisma/index';
 import { companyProvider } from '../../providers';
 import { ICompany } from '../../shared/models';
 import * as yup from 'yup';
@@ -24,11 +24,9 @@ export const createValidation = validation((getSchema) => ({
     }))
 }));
 
-const prisma = new PrismaClient();
-
 export const create = async (req: Request<{}, {}, IBodyProps>, res: Response): Promise<void> => {
     try {
-        const result = await companyProvider.create(prisma, req.body);
+        const result = await companyProvider.create(central, req.body);
         if (result instanceof Error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                 errors: { default: result.message }

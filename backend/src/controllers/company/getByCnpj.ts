@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PrismaClient } from '../../prisma/generated/Tenant';
+import { central } from '../../prisma/index';
 import { companyProvider } from '../../providers';
 import { validation } from '../../shared/middlewares/validation';
 import * as yup from 'yup';
@@ -15,7 +15,6 @@ export const getByCnpjValidation = validation((getSchema) => ({
     }))
 }));
 
-const prisma = new PrismaClient();
 
 export const getByCnpj = async (req: Request<IParamsProps>, res: Response): Promise<void> => {
     if(!req.params.cnpj) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -25,7 +24,7 @@ export const getByCnpj = async (req: Request<IParamsProps>, res: Response): Prom
         
     });
 
-    const result = await companyProvider.getByCnpj(prisma, req.params.cnpj as string);
+    const result = await companyProvider.getByCnpj(central, req.params.cnpj as string);
     
     if (result instanceof Error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PrismaClient } from '../../prisma/generated/Tenant';
+import { central } from '../../prisma/index';
 
-const prisma = new PrismaClient();
 
 export const confirmEmail = async (req: Request, res: Response): Promise<void> => {
     const { token } = req.query;
@@ -13,7 +12,7 @@ export const confirmEmail = async (req: Request, res: Response): Promise<void> =
     }
 
     try {
-        const user = await prisma.user.findUnique({
+        const user = await central.user.findUnique({
             where: { mailToken: token },
         });
 
@@ -22,7 +21,7 @@ export const confirmEmail = async (req: Request, res: Response): Promise<void> =
             return 
         }
 
-        await prisma.user.update({
+        await central.user.update({
             where: { id: user.id },
             data: {
                 verified: true,

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PrismaClient } from '../../prisma/generated/Tenant';
+import { central } from '../../prisma/index';
 import { userProvider } from '../../providers/user';
 import { IUserUpdate } from '../../shared/models';
 import * as yup from 'yup';
@@ -23,8 +23,6 @@ export const updateValidation = validation((getSchema) => ({
     }))
 }));
 
-const prisma = new PrismaClient();
-
 export const update = async (req: Request<IParamsProps,{},IBodyProps>, res: Response): Promise<void> => {
     if(!req.params.id) res.status(StatusCodes.BAD_REQUEST).json({
         errors: {
@@ -32,7 +30,7 @@ export const update = async (req: Request<IParamsProps,{},IBodyProps>, res: Resp
         }
     });
 
-    const result = await userProvider.update(prisma, Number(req.params.id), req.body);
+    const result = await userProvider.update(central, Number(req.params.id), req.body);
     if (result instanceof Error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             errors:{

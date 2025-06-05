@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PrismaClient } from '../../prisma/generated/Tenant';
+import { central } from '../../prisma/index';
 import { userProvider } from '../../providers/user';
 import { validation } from '../../shared/middlewares/validation';
 import * as yup from 'yup';
@@ -15,8 +15,6 @@ export const getByIdValidation = validation((getSchema) => ({
     }))
 }));
 
-const prisma = new PrismaClient();
-
 export const getById = async (req: Request<IParamsProps>, res: Response): Promise<void> => {
     if(!req.params.id) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         errors: {
@@ -25,7 +23,7 @@ export const getById = async (req: Request<IParamsProps>, res: Response): Promis
         
     });
 
-    const result = await userProvider.getById(prisma , Number(req.params.id));
+    const result = await userProvider.getById(central , Number(req.params.id));
     
     if (result instanceof Error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
