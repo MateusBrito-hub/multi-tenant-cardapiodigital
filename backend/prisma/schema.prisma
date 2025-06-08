@@ -10,15 +10,15 @@ datasource db {
 
 model Tenant {
   id           Int      @id @default(autoincrement())
-  name         String
-  businessName String
-  cnpj         String   @unique
-  email        String   @unique
+  name         String   
+  businessName String   
+  cnpj         String   @unique 
+  email        String   @unique 
   password     String
   phone        String
   address      String
   description  String?
-  slug         String   @unique
+  slug         String   @unique 
   logoUrl      String?
   dbUrl        String   @map("db_url")
   status       Boolean  @default(true)
@@ -29,7 +29,7 @@ model Tenant {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String   @unique 
   password  String
   mailToken String?  @unique
   verified  Boolean  @default(true)

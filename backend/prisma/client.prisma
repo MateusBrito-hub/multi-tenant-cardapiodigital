@@ -10,13 +10,13 @@ datasource db {
 
 model Category {
   id       String     @id @default(uuid())
-  name     String
+  name     String     
   product  Product[] 
 }
 
 model Product {
   id          String     @id @default(uuid())
-  name        String
+  name        String     
   description String
   price       Float
   categoryId  String
@@ -34,7 +34,7 @@ model Order {
 
 model OrderItens {
   id         Int        @id @default(autoincrement())
-  orderId    Int
+  orderId    Int        
   productId  Int
   quantity   Int
   unitPrice  Decimal
