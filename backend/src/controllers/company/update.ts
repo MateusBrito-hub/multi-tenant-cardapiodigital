@@ -35,7 +35,7 @@ export const updateValidation = validation((getSchema) => ({
 export const update = async (req: Request<IParamsProps,{},IBodyProps>, res: Response): Promise<void> => {
     if(!req.params.cnpj) res.status(StatusCodes.BAD_REQUEST).json({
         errors: {
-            default: 'O parâmetro "id" precisa ser informado'
+            default: 'O parâmetro "CNPJ" precisa ser informado'
         }
     });
 

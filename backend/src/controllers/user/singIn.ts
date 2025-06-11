@@ -6,6 +6,7 @@ import { IUser } from '../../shared/models';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares/validation';
 import { JWTService, passwordCrypto } from '../../shared/services';
+import { error } from 'console';
 
 interface IBodyProps extends Omit<IUser, 'id' | 'mailToken' | 'verified' | 'name'> { }
 
@@ -48,10 +49,11 @@ export const signIn = async (req: Request<{}, {}, IBodyProps>, res: Response) : 
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                 errors: { default: 'Erro ao gerar token de acesso.' }
             });
+            console.log(error)
             return;
         }
 
-        res.status(StatusCodes.OK).json({ accessToken });
+        res.status(StatusCodes.OK).json({ accessToken, user: { id: user.id, email: user.email, name: user.name } });
 
     } catch (error) {
         console.error('Erro no login:', error);

@@ -14,4 +14,5 @@ export function migrarBanco(dbUrl: string) {
         env: { ...process.env, CLIENT_DATABASE_URL: dbUrl },
         stdio: 'inherit',
     });
+    return true;
 }

@@ -37,5 +37,7 @@ export const ensureAuthenticated: RequestHandler = async (req, res, next): Promi
 
     req.headers.idUsuario = JwtData.uid.toString();
 
+    console.log(`Usuário autenticado: ${req.headers.idUsuario}`);
+
     return next();
 };

@@ -9,6 +9,7 @@ export interface ICompany {
     cnpj: string;
     phone: string;
     address: string;
+    status: boolean;
     description?: string;
     logoUrl?: string;
 }

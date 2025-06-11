@@ -9,7 +9,8 @@ export const update = async (prisma: PrismaClient, cnpj: string, dados: ICompany
 
         if (!company) return new Error('Empresa não encontrada');
 
-        if (dados.name) {
+        if(cnpj !== dados.cnpj) {
+            if (dados.name) {
             const slug = gerarSlug(dados.name);
             const validateSlug = await prisma.tenant.findUnique({
                 where: { slug: slug }
@@ -19,6 +20,7 @@ export const update = async (prisma: PrismaClient, cnpj: string, dados: ICompany
                 return new Error('Empresa já cadastrado');
             }
             dados.slug = slug;
+        }
         }
 
         if (dados.password) {

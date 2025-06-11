@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { ensureAuthenticated } from '../shared/middlewares/ensureAuthenticated';
 import {router as UserRoutes} from './user';
 import {router as CompanyRoutes} from './company';
 

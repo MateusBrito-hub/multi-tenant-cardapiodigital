@@ -1,0 +1,129 @@
+<div class="p-4">
+  <h1 class="text-2xl font-bold mb-4">Gerenciar Tenants</h1>
+
+  <!-- Botão para abrir modal de criação -->
+  <button (click)="openCreateModal()" class="bg-indigo-600 text-white px-4 py-2 rounded mb-4">
+    Nova Tenant
+  </button>
+
+  <!-- Lista de Tenants -->
+  <h2 class="text-xl font-semibold mb-2">Lista de Tenants</h2>
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="p-2 border">ID</th>
+        <th class="p-2 border">Nome</th>
+        <th class="p-2 border">Email</th>
+        <th class="p-2 border">CNPJ</th>
+        <th class="p-2 border">Telefone</th>
+        <th class="p-2 border">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tenant of tenants" class="hover:bg-gray-50">
+        <td class="p-2 border">{{ tenant.id }}</td>
+        <td class="p-2 border">{{ tenant.name }}</td>
+        <td class="p-2 border">{{ tenant.email }}</td>
+        <td class="p-2 border">{{ tenant.cnpj }}</td>
+        <td class="p-2 border">{{ tenant.phone }}</td>
+        <td class="p-2 border">
+          <button (click)="openEditModal(tenant)" class="bg-indigo-600 px-2 py-1 text-white rounded">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="changePage(page - 1)" [disabled]="page === 1">Anterior</button>
+  <span>Página {{ page }} de {{ totalPages() }}</span>
+  <button (click)="changePage(page + 1)" [disabled]="page === totalPages()">Próxima</button>
+
+  <select #pageSizeSelect (change)="changePageSize(+pageSizeSelect.value)">
+    <option [value]="5">5</option>
+    <option [value]="10" selected>10</option>
+    <option [value]="20">20</option>
+  </select>
+
+  <!-- Modal de Criação/Edição (Melhorado) -->
+  <div *ngIf="isModalOpen" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+      <h2 class="text-xl font-bold mb-4 text-center">
+        {{ tenantFormData.cnpj ? 'Editar Tenant' : 'Nova Tenant' }}
+      </h2>
+
+      <form (ngSubmit)="onSubmit()" #tenantForm="ngForm" class="space-y-4">
+        <input type="hidden" [(ngModel)]="tenantFormData.cnpj" name="cnpj" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block">Nome:</label>
+            <input type="text" [(ngModel)]="tenantFormData.name" name="name" required class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Slug:</label>
+            <input type="text" [(ngModel)]="tenantFormData.slug" name="slug" class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Database URL:</label>
+            <input type="text" [(ngModel)]="tenantFormData.dbUrl" name="dbUrl" class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Email:</label>
+            <input type="email" [(ngModel)]="tenantFormData.email" name="email" required class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Senha:</label>
+            <input type="password" [(ngModel)]="tenantFormData.password" name="password" required
+              class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Razão Social:</label>
+            <input type="text" [(ngModel)]="tenantFormData.businessName" name="businessName" required
+              class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">CNPJ:</label>
+            <input type="text" [(ngModel)]="tenantFormData.cnpj" name="cnpj" required class="border p-2 w-full" />
+          </div>
+
+          <div>
+            <label class="block">Telefone:</label>
+            <input type="text" [(ngModel)]="tenantFormData.phone" name="phone" required class="border p-2 w-full" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block">Endereço:</label>
+            <input type="text" [(ngModel)]="tenantFormData.address" name="address" required class="border p-2 w-full" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block">Descrição:</label>
+            <textarea [(ngModel)]="tenantFormData.description" name="description" class="border p-2 w-full"></textarea>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block">Logo URL:</label>
+            <input type="text" [(ngModel)]="tenantFormData.logoUrl" name="logoUrl" class="border p-2 w-full" />
+          </div>
+        </div>
+
+        <!-- Ações do Modal -->
+        <div class="flex justify-end space-x-2 mt-6">
+          <button type="button" (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">
+            Cancelar Ação
+          </button>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+            {{ tenantFormData.cnpj ? 'Atualizar' : 'Criar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

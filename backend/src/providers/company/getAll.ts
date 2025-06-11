@@ -18,7 +18,7 @@ export const getAll = async (prisma: PrismaClient, page: number, limit: number, 
         const result = await prisma.tenant.findMany({
             where: whereCondition,
             skip: (page - 1) * limit,
-            take: limit,
+            take: Number(limit)
         });
 
         if (cnpj != '' && !result.some((item) => item.cnpj === cnpj)) {
@@ -26,7 +26,8 @@ export const getAll = async (prisma: PrismaClient, page: number, limit: number, 
             if (itemByCnpj) return [...result, itemByCnpj];
         }
         return result;
-    } catch {
+    } catch(error) {
+        console.error('Erro ao listar os usuários:', error);
         return new Error('Erro ao listar os usuários');
     }
 };

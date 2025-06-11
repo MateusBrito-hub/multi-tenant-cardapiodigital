@@ -19,6 +19,7 @@ export const createValidation = validation((getSchema) => ({
         address: yup.string().required(),
         description: yup.string().optional(),
         slug: yup.string().optional(),
+        status: yup.boolean().required(),
         logoUrl: yup.string().optional(),
         dbUrl: yup.string().optional(),
     }))
